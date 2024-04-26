@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:simon_pkl/app/routes/app_pages.dart';
 import 'package:simon_pkl/material/material.dart';
 
 import '../controllers/login_siswa_controller.dart';
@@ -104,7 +105,7 @@ class LoginSiswaView extends GetView<LoginSiswaController> {
         ),
       ),
       onPressed: (){
-        // Get.offNamed(RoutesName.homePageNull);
+        Get.offNamed(Routes.HOME);
       },
       child: const Text(
         "Login",

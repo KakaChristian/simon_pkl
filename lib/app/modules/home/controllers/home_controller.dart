@@ -1,11 +1,20 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:simon_pkl/app/modules/beranda_page/views/beranda_page_view.dart';
+import 'package:simon_pkl/app/modules/laporan_page/views/laporan_page_view.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  RxInt indexWidget = 0.obs;
+  void changeIndexBottomNav(int index) {
+    indexWidget.value = index;
+  }
 
-  final count = 0.obs;
-
-
-
-  void increment() => count.value++;
+  List<Widget> myPage = [
+    // BERANDA
+    const BerandaPageView(),
+    // LAPORAN
+    const LaporanPageView(),
+    // NOTIFIKASI
+    
+  ];
 }

@@ -20,7 +20,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/logo/logo-simon-app.jpg"
+  image_path: "assets/logo/simon-logo.png"
 
 flutter:
 
