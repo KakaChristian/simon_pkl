@@ -21,4 +21,5 @@ abstract class AllMaterial {
   static const colorWhite = Colors.white;
   static const colorGreySec = Color(0xffF7F7F7);
   static const colorBlack = Color(0xff1B1D2A);
+  static const colorGreen = Color(0xff15DF1D);
 }

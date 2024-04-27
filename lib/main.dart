@@ -9,6 +9,8 @@ import 'app/routes/app_pages.dart';
 void main() {
   runApp(
     GetMaterialApp(
+      showSemanticsDebugger: false,
+      
       debugShowCheckedModeBanner: false,
       // home: const LoginSelect(),
       home: FutureBuilder(

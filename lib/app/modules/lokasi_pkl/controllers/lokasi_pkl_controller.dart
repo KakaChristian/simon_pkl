@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
 
 class LokasiPklController extends GetxController {
-  //TODO: Implement LokasiPklController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  var expandedIndices = List<bool?>.filled(19, false).obs;
+
+  void setExpansion(int index, bool value) {
+    expandedIndices[index] = value;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  var activeIndex = RxInt(-1);
+
+  void setActiveIndex(int index) {
+    if (activeIndex.value != index) {
+      activeIndex.value = index;
+    } else {
+      activeIndex.value = -1;
+    }
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  bool isExpanded(int index) => activeIndex.value == index;
 }
+
