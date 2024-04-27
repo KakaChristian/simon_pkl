@@ -6,11 +6,13 @@ environment:
   sdk: ">=3.3.3 <4.0.0"
 
 dependencies:
+  iconify_flutter: ^0.0.5
   cupertino_icons: ^1.0.2
-  flutter:
-    sdk: flutter
   flutter_launcher_icons: ^0.13.1
   get: ^4.6.6
+  iconify: 0.0.1
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -18,17 +20,13 @@ dev_dependencies:
     sdk: flutter
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: launcher_icon
+  image_path: assets/logo/simon-logo.png
   ios: true
-  image_path: "assets/logo/simon-logo.png"
 
 flutter:
-
-  uses-material-design: true
-
   assets:
     - assets/logo/
-
   fonts:
     - family: Montserrat
       fonts:
@@ -38,3 +36,4 @@ flutter:
           weight: 600
         - asset: fonts/Montserrat-Medium.ttf
           weight: 400
+  uses-material-design: true

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simon_pkl/app/modules/profile_page/profile_item.dart';
 import 'package:simon_pkl/app/modules/profile_page/profile_item_widget.dart';
+import 'package:simon_pkl/app/routes/app_pages.dart';
 import 'package:simon_pkl/material/material.dart';
 
 import '../controllers/profile_page_controller.dart';
@@ -48,13 +49,39 @@ class ProfilePageView extends GetView<ProfilePageController> {
               ],
             ),
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.more_vert_outlined,
-                  color: AllMaterial.colorBlue,
-                ),
-              ),
+              PopupMenuButton(
+                  color: AllMaterial.colorWhite,
+                  surfaceTintColor: AllMaterial.colorWhite,
+                  iconColor: AllMaterial.colorBlue,
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        onTap: () => AllMaterial.alertSimon(
+                          msg: "Apakah Anda ingin Logout?",
+                          msgC:
+                              "Jika Anda ingin logout, semua progres dan laporan anda saat ini akan terhapus dan tidak dapat diakses kecuali anda login kembali.",
+                          onCancel: () => print("Test Batal"),
+                          onConfirm: () => Get.offAllNamed(Routes.SELECT_LOGIN),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.logout_rounded,
+                              color: Colors.red,
+                            ),
+                            Text(
+                              "Log out",
+                              style: TextStyle(
+                                fontFamily: AllMaterial.fontFamily,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ];
+                  })
             ],
           ),
           SliverToBoxAdapter(
