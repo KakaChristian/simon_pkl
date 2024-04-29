@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:simon_pkl/app/modules/login_siswa/controllers/login_siswa_controller.dart';
 import 'package:simon_pkl/app/modules/profile_page/profile_item.dart';
 import 'package:simon_pkl/app/modules/profile_page/profile_item_widget.dart';
 import 'package:simon_pkl/app/routes/app_pages.dart';
@@ -8,8 +9,12 @@ import 'package:simon_pkl/material/material.dart';
 
 import '../controllers/profile_page_controller.dart';
 
+// ignore: must_be_immutable
 class ProfilePageView extends GetView<ProfilePageController> {
-  const ProfilePageView({Key? key}) : super(key: key);
+  LoginSiswaController dataUser = LoginSiswaController();
+  
+
+  ProfilePageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +61,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
                   itemBuilder: (context) {
                     return [
                       PopupMenuItem(
-                        onTap: () => AllMaterial.alertSimon(
+                        onTap: () => AllMaterial.dialogSimon(
                           msg: "Apakah Anda ingin Logout?",
                           msgC:
                               "Jika Anda ingin logout, semua progres dan laporan anda saat ini akan terhapus dan tidak dapat diakses kecuali anda login kembali.",
@@ -89,7 +94,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
               padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
               child: Column(
                 children: [
-                  const ProfileItem(),
+                  ProfileItem(),
                   const SizedBox(
                     height: 20,
                   ),

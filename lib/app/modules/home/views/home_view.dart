@@ -58,7 +58,7 @@ class _HomePageAwalState extends State<HomePageAwal> {
           NotifikasiPageView(),
 
           // Profil =======>
-          const ProfilePageView(),
+          ProfilePageView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

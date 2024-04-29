@@ -46,7 +46,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN_SISWA,
-      page: () => const LoginSiswaView(),
+      page: () => LoginSiswaView(),
       binding: LoginSiswaBinding(),
     ),
     GetPage(
@@ -66,7 +66,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE_PAGE,
-      page: () => const ProfilePageView(),
+      page: () => ProfilePageView(),
       binding: ProfilePageBinding(),
     ),
     GetPage(

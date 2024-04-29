@@ -1,8 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:simon_pkl/app/modules/login_siswa/controllers/login_siswa_controller.dart';
 import 'package:simon_pkl/material/material.dart';
 
 class ProfileItem extends StatelessWidget {
-  const ProfileItem({
+  LoginSiswaController dataUser = LoginSiswaController();
+   ProfileItem({
     super.key,
   });
 
@@ -34,7 +38,7 @@ class ProfileItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Habil Arlian Asrori",
+              "",
               style: TextStyle(
                 fontSize: 15,
                 fontFamily: AllMaterial.fontFamily,

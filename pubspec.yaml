@@ -6,13 +6,16 @@ environment:
   sdk: ">=3.3.3 <4.0.0"
 
 dependencies:
-  iconify_flutter: ^0.0.5
   cupertino_icons: ^1.0.2
-  flutter_launcher_icons: ^0.13.1
-  get: ^4.6.6
-  iconify: 0.0.1
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  http: ^1.2.1
+  iconify: 0.0.1
+  iconify_flutter: ^0.0.5
+  material_design_icons_flutter: ^7.0.7296
 
 dev_dependencies:
   flutter_lints: ^2.0.0

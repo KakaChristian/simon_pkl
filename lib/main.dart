@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:simon_pkl/app/modules/select_login/views/select_login_view.dart';
 import 'package:simon_pkl/app/modules/snapshot/views/snapshot_view.dart';
 
 import 'app/routes/app_pages.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(
     GetMaterialApp(
       showSemanticsDebugger: false,
-      
+
       debugShowCheckedModeBanner: false,
       // home: const LoginSelect(),
       home: FutureBuilder(

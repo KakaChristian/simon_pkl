@@ -1,13 +1,16 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:simon_pkl/app/routes/app_pages.dart';
 import 'package:simon_pkl/material/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../controllers/login_siswa_controller.dart';
 
 class LoginSiswaView extends GetView<LoginSiswaController> {
-  const LoginSiswaView({super.key});
+  LoginSiswaController dataUser = LoginSiswaController();
+  LoginSiswaView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,9 @@ class LoginSiswaView extends GetView<LoginSiswaController> {
               ),
             ),
             const SizedBox(height: 15),
-            const TextField(
+            TextField(
+              keyboardType: TextInputType.number,
+              controller: controller.nisnC,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 focusColor: AllMaterial.colorBlue,
@@ -61,36 +66,47 @@ class LoginSiswaView extends GetView<LoginSiswaController> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            TextField(
-              autocorrect: false,
-              cursorColor: AllMaterial.colorBlue,
-              obscureText: true,
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.remove_red_eye_rounded,
-                    color: AllMaterial.colorGrey,
+            SizedBox(height: 10),
+            Obx(
+              () => TextField(
+                controller: controller.pwC,
+                autocorrect: false,
+                cursorColor: AllMaterial.colorBlue,
+                obscureText: (controller.isObsecure.isTrue) ? true : false,
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      controller.isObsecure.value =
+                          !controller.isObsecure.value;
+                    },
+                    icon: (controller.isObsecure.isTrue)
+                        ? Icon(
+                            Icons.remove_red_eye_rounded,
+                            color: AllMaterial.colorGrey,
+                          )
+                        : Icon(
+                            MdiIcons.eyeOff,
+                            color: AllMaterial.colorGrey,
+                          ),
                   ),
-                ),
-                focusColor: AllMaterial.colorBlue,
-                hoverColor: AllMaterial.colorBlue,
-                fillColor: AllMaterial.colorBlue,
-                contentPadding: const EdgeInsets.all(10),
-                labelText: 'Password',
-                labelStyle: const TextStyle(
-                  fontFamily: AllMaterial.fontFamily,
-                  fontSize: 14,
-                ),
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AllMaterial.colorBlue,
+                  focusColor: AllMaterial.colorBlue,
+                  hoverColor: AllMaterial.colorBlue,
+                  fillColor: AllMaterial.colorBlue,
+                  contentPadding: const EdgeInsets.all(10),
+                  labelText: 'Password',
+                  labelStyle: const TextStyle(
+                    fontFamily: AllMaterial.fontFamily,
+                    fontSize: 14,
                   ),
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AllMaterial.colorBlue,
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AllMaterial.colorBlue,
+                    ),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AllMaterial.colorBlue,
+                    ),
                   ),
                 ),
               ),
@@ -99,24 +115,24 @@ class LoginSiswaView extends GetView<LoginSiswaController> {
               height: 5,
             ),
             ElevatedButton(
-      style: const ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(
-          AllMaterial.colorBlue,
-        ),
-      ),
-      onPressed: (){
-        Get.offNamed(Routes.HOME);
-      },
-      child: const Text(
-        "Login",
-        style: TextStyle(
-          fontSize: 13,
-          fontFamily: AllMaterial.fontFamily,
-          fontWeight: AllMaterial.fontSemiBold,
-          color: AllMaterial.colorWhite,
-        ),
-      ),
-    ),
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(
+                  AllMaterial.colorBlue,
+                ),
+              ),
+              onPressed: () {
+                controller.login();
+              },
+              child: const Text(
+                "Login",
+                style: TextStyle(
+                  fontSize: 13,
+                  fontFamily: AllMaterial.fontFamily,
+                  fontWeight: AllMaterial.fontSemiBold,
+                  color: AllMaterial.colorWhite,
+                ),
+              ),
+            ),
           ],
         ),
       ),

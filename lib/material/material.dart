@@ -24,8 +24,8 @@ abstract class AllMaterial {
   static const colorBlack = Color(0xff1B1D2A);
   static const colorGreen = Color(0xff15DF1D);
 
-  // Alert
-  static alertSimon({
+  // Dialog
+  static dialogSimon({
     required String msg,
     required String msgC,
     void Function()? onCancel,
@@ -53,6 +53,20 @@ abstract class AllMaterial {
       textCancel: "Batalkan",
       onCancel: onCancel,
       onConfirm: onConfirm,
+    );
+  }
+
+  static alertSimon({
+    required String msg,
+    required String msgC,
+  }) {
+    return Get.snackbar(
+      msg,
+      msgC,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(
+        milliseconds: 1200,
+      ),
     );
   }
 }
