@@ -1,14 +1,21 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:simon_pkl/app/modules/login_siswa/controllers/login_siswa_controller.dart';
+// import 'package:simon_pkl/app/models/user_model_data.dart';
+
+// import 'package:simon_pkl/app/models/user_model.dart';
+import 'package:simon_pkl/app/modules/profile_page/controllers/profile_page_controller.dart';
 import 'package:simon_pkl/material/material.dart';
 
-class ProfileItem extends StatelessWidget {
-  LoginSiswaController dataUser = LoginSiswaController();
-   ProfileItem({
+class ProfileItem extends GetView<ProfilePageController> {
+
+  ProfileItem({
     super.key,
   });
+
+  var dataSiswa = LoginSiswaController.box.read("siswaData");
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +41,11 @@ class ProfileItem extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 20),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "",
+            'Nama : ${dataSiswa["nama"]}',
               style: TextStyle(
                 fontSize: 15,
                 fontFamily: AllMaterial.fontFamily,
@@ -46,7 +53,7 @@ class ProfileItem extends StatelessWidget {
               ),
             ),
             Text(
-              "NISN : 1412523",
+              'NISN : ${dataSiswa["nis"]}',
               style: TextStyle(
                 fontSize: 12,
                 fontFamily: AllMaterial.fontFamily,

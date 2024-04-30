@@ -11,8 +11,7 @@ import '../controllers/profile_page_controller.dart';
 
 // ignore: must_be_immutable
 class ProfilePageView extends GetView<ProfilePageController> {
-  LoginSiswaController dataUser = LoginSiswaController();
-  
+  var dataSiswa = LoginSiswaController.box.read("siswaData");
 
   ProfilePageView({Key? key}) : super(key: key);
   @override
@@ -103,35 +102,36 @@ class ProfilePageView extends GetView<ProfilePageController> {
                   ),
                   ProfileItemWidget(
                     title: "Jurusan",
-                    subTitle: "Rekayasa Perangkat Lunak",
+                    subTitle: "${dataSiswa["jurusan"]["nama"]}",
                   ),
                   const Divider(
                     height: 2,
                   ),
                   ProfileItemWidget(
                     title: "Kelas",
-                    subTitle: "XII RPL 2",
+                    subTitle: "${dataSiswa["kelas"]["nama"]}",
                   ),
                   const Divider(
                     height: 2,
                   ),
                   ProfileItemWidget(
                     title: "Alamat",
-                    subTitle: "Jl. Karang Bayan, Lingsar No. 22",
+                    subTitle:
+                        "${dataSiswa["alamat"]["detail_tempat"]} ${dataSiswa["alamat"]["desa"]} ${dataSiswa["alamat"]["kecamatan"]} ${dataSiswa["alamat"]["kabupaten"]} ${dataSiswa["alamat"]["provinsi"]} ${dataSiswa["alamat"]["negara"]}",
                   ),
                   const Divider(
                     height: 2,
                   ),
                   ProfileItemWidget(
                     title: "Jenis Kelamin",
-                    subTitle: "Lapu-Lapu",
+                    subTitle: "${dataSiswa["jenis_kelamin"]}",
                   ),
                   const Divider(
                     height: 2,
                   ),
                   ProfileItemWidget(
                     title: "Agama",
-                    subTitle: "Islam (Rill)",
+                    subTitle: "${dataSiswa["agama"]}",
                   ),
                   const Divider(
                     height: 2,
