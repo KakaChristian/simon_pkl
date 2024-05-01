@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:simon_pkl/app/modules/lokasi_pkl/controllers/lokasi_pkl_controller.dart';
+import 'package:simon_pkl/app/routes/app_pages.dart';
 
 class BerandaPageController extends GetxController {
-
-  final count = 0.obs;
-
-
-
-  void increment() => count.value++;
+  LokasiPklController dataPKL = LokasiPklController();
+  Future<dynamic> ambilDataDudi() async {
+    () => Get.toNamed(Routes.LOKASI_PKL);
+    await dataPKL.fetchData();
+  }
 }

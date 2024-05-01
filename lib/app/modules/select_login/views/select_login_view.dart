@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:simon_pkl/app/routes/app_pages.dart';
 import 'package:simon_pkl/material/material.dart';
 
 import '../controllers/select_login_controller.dart';
@@ -42,7 +41,7 @@ class SelectLoginView extends GetView<SelectLoginController> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Get.offNamed(Routes.LOGIN_SISWA);
+                    controller.sebagaiSiswa();
                   },
                   style: const ButtonStyle(
                     fixedSize: MaterialStatePropertyAll(Size.fromWidth(140)),
@@ -63,7 +62,7 @@ class SelectLoginView extends GetView<SelectLoginController> {
                   width: 5,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: (){controller.sebagaiDudi();},
                   style: const ButtonStyle(
                     fixedSize: MaterialStatePropertyAll(Size.fromWidth(140)),
                   ),
@@ -80,7 +79,7 @@ class SelectLoginView extends GetView<SelectLoginController> {
               ],
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {controller.sebagaiGuru();},
               child: const Text(
                 "Guru Pembimbing",
                 style: TextStyle(

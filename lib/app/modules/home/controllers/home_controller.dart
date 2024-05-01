@@ -11,7 +11,7 @@ class HomeController extends GetxController {
 
   List<Widget> myPage = [
     // BERANDA
-    const BerandaPageView(),
+     BerandaPageView(),
     // LAPORAN
     const LaporanPageView(),
     // NOTIFIKASI

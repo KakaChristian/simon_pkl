@@ -49,7 +49,7 @@ class _HomePageAwalState extends State<HomePageAwal> {
         },
         children: [
           // Beranda =======>
-          const BerandaPageView(),
+           BerandaPageView(),
 
           // Laporan =======>
           const LaporanPageView(),

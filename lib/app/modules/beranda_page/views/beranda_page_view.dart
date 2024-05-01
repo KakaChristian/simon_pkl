@@ -1,13 +1,16 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:simon_pkl/app/routes/app_pages.dart';
+
 import 'package:simon_pkl/material/material.dart';
 
 import '../controllers/beranda_page_controller.dart';
 
 class BerandaPageView extends GetView<BerandaPageController> {
-  const BerandaPageView({Key? key}) : super(key: key);
+  var controllerB = Get.put(BerandaPageController());
+  BerandaPageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +35,9 @@ class BerandaPageView extends GetView<BerandaPageController> {
           Padding(
             padding: const EdgeInsets.all(5),
             child: IconButton(
-              onPressed: () => Get.toNamed(Routes.LOKASI_PKL),
+              onPressed: () {
+                controllerB.ambilDataDudi();
+              },
               icon: const Icon(Icons.add_outlined),
               color: Colors.white,
               style: ButtonStyle(

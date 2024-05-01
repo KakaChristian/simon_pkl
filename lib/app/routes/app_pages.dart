@@ -56,7 +56,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BERANDA_PAGE,
-      page: () => const BerandaPageView(),
+      page: () =>  BerandaPageView(),
       binding: BerandaPageBinding(),
     ),
     GetPage(
@@ -71,7 +71,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOKASI_PKL,
-      page: () => const LokasiPklView(),
+      page: () => LokasiPklView(),
       binding: LokasiPklBinding(),
     ),
   ];

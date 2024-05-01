@@ -1,10 +1,17 @@
 import 'package:get/get.dart';
+import 'package:simon_pkl/material/material.dart';
 
 class SelectLoginController extends GetxController {
-
-  final count = 0.obs;
-
-
-
-  void increment() => count.value++;
+  void sebagaiSiswa() {
+    // Get.offAllNamed(Routes.LOGIN_SISWA);
+    AllMaterial.pilihanLogin = "siswa";
+  }
+  void sebagaiGuru() {
+    // Get.offAllNamed(Routes.LOGIN_SISWA);
+     AllMaterial.pilihanLogin = "guru";
+  }
+  void sebagaiDudi() {
+    // Get.offAllNamed(Routes.LOGIN_SISWA);
+     AllMaterial.pilihanLogin = "dudi";
+  }
 }

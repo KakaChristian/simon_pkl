@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import "package:http/http.dart" as http;
-import 'package:simon_pkl/app/routes/app_pages.dart';
 import 'package:simon_pkl/material/material.dart';
-import 'package:simon_pkl/app/models/user_model_data.dart';
 
 class LoginSiswaController extends GetxController {
   static const loginUrl = "http://10.0.2.2:2008/siswa/Login";
@@ -14,10 +12,19 @@ class LoginSiswaController extends GetxController {
   TextEditingController nisnC = TextEditingController();
   TextEditingController pwC = TextEditingController();
 
+  RxBool isAuth = false.obs;
   RxBool isObsecure = true.obs;
-  var token = "";
+  static String tokenLogin = "";
 
-  static final box = GetStorage();
+  final box = GetStorage();
+
+  Future<void> autoLogin() async {
+    if (box.read("token") != null) {
+      nisnC.dispose();
+      pwC.dispose();
+      isAuth.value = true;
+    }
+  }
 
   Future<void> login() async {
     try {
@@ -31,10 +38,12 @@ class LoginSiswaController extends GetxController {
       var data = jsonDecode(response.body);
       if (nisnC.text.isNotEmpty && pwC.text.isNotEmpty) {
         if (response.statusCode == 200 || response.statusCode == 201) {
-          token = data["data"]["acces_token_siswa"];
-          box.write("token", token);
+          tokenLogin = data["data"]["acces_token_siswa"];
+          box.write("token", tokenLogin);
           await fetchData();
-          Get.offNamed(Routes.HOME);
+          isAuth.value = true;
+          nisnC.clear();
+          pwC.clear();
           return data;
         } else {
           print("error di response");
@@ -60,20 +69,21 @@ class LoginSiswaController extends GetxController {
     }
   }
 
-  Future<SiswaModel> fetchData() async {
+  Future<dynamic> fetchData() async {
     final response = await http.get(
       Uri.parse(getSiswaUrl),
       headers: {
-        "Authorization": "Bearer $token",
+        "Authorization": "Bearer $tokenLogin",
       },
     );
     var data = jsonDecode(response.body) as Map<String, dynamic>;
     if (response.statusCode == 200) {
       print(data["data"]);
       box.write("siswaData", data["data"]);
-      return SiswaModel.fromJson(
-        data["data"],
-      );
+      box.write("token", tokenLogin);
+      isAuth.value = true;
+      nisnC.dispose();
+      pwC.dispose();
     } else {
       throw Exception('Error min');
     }

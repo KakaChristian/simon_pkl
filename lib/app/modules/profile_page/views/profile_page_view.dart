@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:simon_pkl/app/modules/login_siswa/controllers/login_siswa_controller.dart';
 import 'package:simon_pkl/app/modules/profile_page/profile_item.dart';
 import 'package:simon_pkl/app/modules/profile_page/profile_item_widget.dart';
 import 'package:simon_pkl/app/routes/app_pages.dart';
@@ -11,7 +10,7 @@ import '../controllers/profile_page_controller.dart';
 
 // ignore: must_be_immutable
 class ProfilePageView extends GetView<ProfilePageController> {
-  var dataSiswa = LoginSiswaController.box.read("siswaData");
+  var dataSiswa = AllMaterial.box.read("siswaData");
 
   ProfilePageView({Key? key}) : super(key: key);
   @override
@@ -117,21 +116,24 @@ class ProfilePageView extends GetView<ProfilePageController> {
                   ProfileItemWidget(
                     title: "Alamat",
                     subTitle:
-                        "${dataSiswa["alamat"]["detail_tempat"]} ${dataSiswa["alamat"]["desa"]} ${dataSiswa["alamat"]["kecamatan"]} ${dataSiswa["alamat"]["kabupaten"]} ${dataSiswa["alamat"]["provinsi"]} ${dataSiswa["alamat"]["negara"]}",
+                        "${dataSiswa["alamat"]["detail_tempat"]}, ${dataSiswa["alamat"]["desa"]}, ${dataSiswa["alamat"]["kecamatan"]}, ${dataSiswa["alamat"]["kabupaten"]}, ${dataSiswa["alamat"]["provinsi"]}, ${dataSiswa["alamat"]["negara"]}",
                   ),
                   const Divider(
                     height: 2,
                   ),
                   ProfileItemWidget(
                     title: "Jenis Kelamin",
-                    subTitle: "${dataSiswa["jenis_kelamin"]}",
+                    subTitle:
+                        "${dataSiswa["jenis_kelamin"].toString().contains('laki') ? 'Laki-Laki' : dataSiswa["jenis_kelamin"]}",
                   ),
                   const Divider(
                     height: 2,
                   ),
                   ProfileItemWidget(
-                    title: "Agama",
-                    subTitle: "${dataSiswa["agama"]}",
+                    title: "Status PKL",
+                    subTitle: (dataSiswa["status"] != null
+                        ? dataSiswa["status"].toString().replaceAll('_', ' ')
+                        : ""),
                   ),
                   const Divider(
                     height: 2,

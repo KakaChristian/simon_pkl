@@ -1,15 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simon_pkl/material/material.dart';
-
+import 'package:string_capitalize/string_capitalize.dart';
 import '../controllers/lokasi_pkl_controller.dart';
 
 class LokasiPklView extends GetView<LokasiPklController> {
-  const LokasiPklView({Key? key}) : super(key: key);
+  List<dynamic> dataDudi = AllMaterial.box.read("dataAllDudi");
+  LokasiPklView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var texts = "PT TELKOMSEL INDONESIA JAYA GEMING";
     return Scaffold(
       backgroundColor: AllMaterial.colorWhite,
       body: SafeArea(
@@ -81,12 +83,16 @@ class LokasiPklView extends GetView<LokasiPklController> {
                         child: Obx(
                           () => controller.isExpanded(index)
                               ? FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.centerLeft,
                                   child: Text(
-                                    texts,
+                                    textAlign: TextAlign.start,
+                                    "${dataDudi[index]["nama_instansi_perusahaan"]}"
+                                        .capitalizeEach(),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                     style: const TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 15,
                                       fontFamily: AllMaterial.fontFamily,
                                       color: AllMaterial.colorBlack,
                                       fontWeight: FontWeight.bold,
@@ -94,11 +100,13 @@ class LokasiPklView extends GetView<LokasiPklController> {
                                   ),
                                 )
                               : Text(
-                                  texts,
+                                  textAlign: TextAlign.start,
+                                  "${dataDudi[index]["nama_instansi_perusahaan"]}"
+                                      .capitalizeEach(),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: const TextStyle(
-                                    fontSize: 13,
+                                    fontSize: 15,
                                     fontFamily: AllMaterial.fontFamily,
                                     color: AllMaterial.colorBlack,
                                     fontWeight: FontWeight.bold,
@@ -126,11 +134,13 @@ class LokasiPklView extends GetView<LokasiPklController> {
                       ),
                     ],
                   ),
-                  children: const [
+                  children: [
                     ListTile(
                       leading: Text(
                         "Tahun :",
                         style: TextStyle(
+                          color: AllMaterial.colorBlack,
+                          fontWeight: AllMaterial.fontMedium,
                           fontFamily: AllMaterial.fontFamily,
                         ),
                       ),
@@ -145,11 +155,13 @@ class LokasiPklView extends GetView<LokasiPklController> {
                       leading: Text(
                         "No. Telpon :",
                         style: TextStyle(
+                          color: AllMaterial.colorBlack,
+                          fontWeight: AllMaterial.fontMedium,
                           fontFamily: AllMaterial.fontFamily,
                         ),
                       ),
                       title: Text(
-                        "081234567891",
+                        "${dataDudi[index]["no_telepon"]}",
                         style: TextStyle(
                           fontFamily: AllMaterial.fontFamily,
                         ),
@@ -157,13 +169,32 @@ class LokasiPklView extends GetView<LokasiPklController> {
                     ),
                     ListTile(
                       leading: Text(
-                        "Kode :",
+                        "Bidang :",
                         style: TextStyle(
+                          color: AllMaterial.colorBlack,
+                          fontWeight: AllMaterial.fontMedium,
                           fontFamily: AllMaterial.fontFamily,
                         ),
                       ),
                       title: Text(
-                        "000021",
+                        "${dataDudi[index]["bidang"]}".capitalizeEach(),
+                        style: TextStyle(
+                          fontFamily: AllMaterial.fontFamily,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      leading: Text(
+                        "Alamat :",
+                        style: TextStyle(
+                          color: AllMaterial.colorBlack,
+                          fontWeight: AllMaterial.fontMedium,
+                          fontFamily: AllMaterial.fontFamily,
+                        ),
+                      ),
+                      title: Text(
+                        "${dataDudi[index]["alamat"]["detail_tempat"]}, ${dataDudi[index]["alamat"]["desa"]}, ${dataDudi[index]["alamat"]["kecamatan"]}, ${dataDudi[index]["alamat"]["kabupaten"]}, ${dataDudi[index]["alamat"]["provinsi"]}"
+                            .capitalizeEach(),
                         style: TextStyle(
                           fontFamily: AllMaterial.fontFamily,
                         ),
@@ -173,6 +204,8 @@ class LokasiPklView extends GetView<LokasiPklController> {
                       leading: Text(
                         "Kuota :",
                         style: TextStyle(
+                          color: AllMaterial.colorBlack,
+                          fontWeight: AllMaterial.fontMedium,
                           fontFamily: AllMaterial.fontFamily,
                         ),
                       ),
@@ -185,7 +218,7 @@ class LokasiPklView extends GetView<LokasiPklController> {
                     ),
                   ],
                 ),
-                childCount: 19,
+                childCount: dataDudi.length,
               ),
             ),
           ],

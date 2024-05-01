@@ -114,7 +114,7 @@ class LoginSiswaView extends GetView<LoginSiswaController> {
             const SizedBox(
               height: 5,
             ),
-            ElevatedButton(
+             ElevatedButton(
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(
                   AllMaterial.colorBlue,
