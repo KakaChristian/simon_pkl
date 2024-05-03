@@ -2,38 +2,32 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import "package:http/http.dart" as http;
+import 'package:http/http.dart' as http;
 import 'package:simon_pkl/material/material.dart';
 
 class LoginController extends GetxController {
   static const loginUrl = "http://10.0.2.2:2008/auth/auth";
   static const getSiswaUrl = "http://10.0.2.2:2008/siswa/getSiswa";
+  static const getGuruUrl =
+      "http://10.0.2.2:2008/guruPembimbing/getGuruPembimbing";
   static const getDudiUrl =
       "http://10.0.2.2:2008/pembimbingDudi/getPembimbingDudi";
 
-  bool isDudi = false;
-  bool isSiswa = false;
-  bool isGuru = false;
+  RxBool isDudi = RxBool(false);
+  RxBool isSiswa = RxBool(false);
+  RxBool isGuru = RxBool(false);
 
   TextEditingController textBodyC = TextEditingController();
   TextEditingController pwC = TextEditingController();
 
   RxBool isAuth = false.obs;
   RxBool isObsecure = true.obs;
-  var getDataUrl = "";
+  String getDataUrl = "";
   static String tokenLogin = AllMaterial.box.read("token");
+  final dataAuth = AllMaterial.box.read("authentikasi");
   final dataLoginDudi = AllMaterial.box.read("dataLoginDudi");
   final dataLoginGuru = AllMaterial.box.read("dataLoginGuru");
   final dataLoginSiswa = AllMaterial.box.read("dataLoginSiswa");
-
-  // Future<void> autoLogin() async {
-  //   if (tokenLogin != "") {
-  //     textBodyC.dispose();
-  //     pwC.dispose();
-  //     // await login();
-  //     isAuth.value = true;
-  //   }
-  // }
 
   Future<void> login() async {
     try {
@@ -47,25 +41,34 @@ class LoginController extends GetxController {
       var data = jsonDecode(response.body);
       if (textBodyC.text.isNotEmpty && pwC.text.isNotEmpty) {
         print(response.statusCode);
+        print("response post sebagai : ${data["auth"]}");
+        print("response post token : ${data["acces_token"]}");
         if (response.statusCode == 200 || response.statusCode == 201) {
-          print(data["auth"]);
+          print(data);
           AllMaterial.box.write("token", data["acces_token"]);
-          // print(tokenLogin);
-          await autoLogin();
           if (data["auth"] == "pembimbing dudi") {
             getDataUrl = getDudiUrl;
+            AllMaterial.box.write("authentikasi", data["auth"]);
+            await autoLogin();
             isAuth.value = true;
-            isDudi = true;
+            isDudi.value = true;
+            print("apakah auth sebagai dudi? : $isAuth");
             return data;
           } else if (data["auth"] == "guru pembimbing") {
-            getDataUrl = "";
+            getDataUrl = getGuruUrl;
             isAuth.value = true;
-            isGuru = true;
+            isGuru.value = true;
+            AllMaterial.box.write("authentikasi", data["auth"]);
+            await autoLogin();
+            print("apakah auth sebagai guru? : $isAuth");
             return data;
           } else if (data["auth"] == "siswa") {
             getDataUrl = getSiswaUrl;
             isAuth.value = true;
-            isSiswa = true;
+            isSiswa.value = true;
+            AllMaterial.box.write("authentikasi", data["auth"]);
+            await autoLogin();
+            print("apakah auth sebagai siswa? : $isAuth");
             return data;
           }
         } else {
@@ -92,38 +95,36 @@ class LoginController extends GetxController {
     try {
       final tokenLogin = AllMaterial.box.read("token");
       if (tokenLogin != null) {
-        final response = await http.get(
-          Uri.parse(getDataUrl),
-          headers: {
-            "Authorization": "Bearer $tokenLogin",
-          },
-        );
-        print(getDataUrl);
-        print(response.body);
-        
-        if (response.statusCode == 200) {
-          isAuth.value = true;
-          var data = jsonDecode(response.body);
-          if (data["auth"] == "pembimbing dudi") {
-            AllMaterial.box.write("dataLoginDudi", data["data"]);
-            isDudi = true;
-            print(isDudi);
-          } else if (data["auth"] == "guru pembimbing") {
-            AllMaterial.box.write("dataLoginGuru", data["data"]);
-            isGuru = true;
-            print(isGuru);
-          } else if (data["auth"] == "siswa") {
-            AllMaterial.box.write("dataLogin Siswa", data["data"]);
-            isSiswa = true;
-            print(isSiswa);
+        if (getDataUrl.isNotEmpty) {
+          final response = await http.get(
+            Uri.parse(getDataUrl),
+            headers: {
+              "Authorization": "Bearer $tokenLogin",
+            },
+          );
+          if (response.statusCode == 200) {
+            isAuth.value = true;
+            var data = jsonDecode(response.body);
+            print(data);
+            print(response.statusCode);
+            if (data["data"].toString().contains("username")) {
+              AllMaterial.box.write("dataLoginDudi", data["data"]);
+              print(data["data"]);
+            } else if (data["data"].toString().contains("nip")) {
+              AllMaterial.box.write("dataLoginGuru", data["data"]);
+              print(data["data"]);
+            } else if (data["data"].toString().contains("nis")) {
+              AllMaterial.box.write("dataLoginSiswa", data["data"]);
+              print(data["data"]);
+            }
+          } else {
+            AllMaterial.box.erase();
+            isAuth.value = false;
           }
-        } else {
-          AllMaterial.box.erase();
-          isAuth.value = false;
         }
       }
     } catch (e) {
-      print(dataLoginDudi);
+      print(getDataUrl);
       print("error di autoLogin : $e");
     }
   }
@@ -141,6 +142,9 @@ class LoginController extends GetxController {
     super.onClose();
   }
 }
+
+
+
 
   // Future<dynamic> fetchDataSiswa() async {
   //   final response = await http.get(

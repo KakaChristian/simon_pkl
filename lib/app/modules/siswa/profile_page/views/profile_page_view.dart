@@ -11,8 +11,8 @@ import '../controllers/profile_page_controller.dart';
 // ignore: must_be_immutable
 class ProfilePageView extends GetView<ProfilePageController> {
   var auth = LoginController();
-  var dataSiswa = AllMaterial.box.read("siswaData");
-  
+  var dataSiswa = AllMaterial.box.read("dataSiswa");
+
   ProfilePageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -104,6 +104,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
                   ProfileItemWidget(
                     title: "Jurusan",
                     subTitle: "${dataSiswa["jurusan"]["nama"]}",
+                    // subTitle: "{dataSiswa[jurusan][nama]}",
                   ),
                   const Divider(
                     height: 2,
@@ -111,6 +112,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
                   ProfileItemWidget(
                     title: "Kelas",
                     subTitle: "${dataSiswa["kelas"]["nama"]}",
+                    // subTitle: "{dataSiswa[kelas][nama]}",
                   ),
                   const Divider(
                     height: 2,
@@ -119,6 +121,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
                     title: "Alamat",
                     subTitle:
                         "${dataSiswa["alamat"]["detail_tempat"]}, ${dataSiswa["alamat"]["desa"]}, ${dataSiswa["alamat"]["kecamatan"]}, ${dataSiswa["alamat"]["kabupaten"]}, ${dataSiswa["alamat"]["provinsi"]}, ${dataSiswa["alamat"]["negara"]}",
+                        // "{dataSiswa[alamat][kecamatan]}, {dataSiswa[alamat][negara]}",
                   ),
                   const Divider(
                     height: 2,
@@ -127,6 +130,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
                     title: "Jenis Kelamin",
                     subTitle:
                         "${dataSiswa["jenis_kelamin"].toString().contains('laki') ? 'Laki-Laki' : dataSiswa["jenis_kelamin"]}",
+                        // "{dataSiswa[jenis_kelamin",
                   ),
                   const Divider(
                     height: 2,
@@ -136,6 +140,15 @@ class ProfilePageView extends GetView<ProfilePageController> {
                     subTitle: (dataSiswa["status"] != null
                         ? dataSiswa["status"].toString().replaceAll('_', ' ')
                         : ""),
+                    // subTitle: "af",
+                  ),
+                  const Divider(
+                    height: 2,
+                  ),
+                  ProfileItemWidget(
+                    title: "Guru Pembimbing",
+                    subTitle: dataSiswa["guru_pembimbing"]["nama"],
+                    // subTitle: "af",
                   ),
                   const Divider(
                     height: 2,

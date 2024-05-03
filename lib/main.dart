@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:simon_pkl/app/modules/dudi/home_dudi/views/home_dudi_view.dart';
 import 'package:simon_pkl/app/modules/guru_pembimbing/home_guru/views/home_guru_view.dart';
-// import 'package:simon_pkl/app/modules/siswa/home/views/home_view.dart';
 import 'package:simon_pkl/app/modules/login/controllers/login_controller.dart';
 import 'package:simon_pkl/app/modules/login/views/login_view.dart';
 import 'package:simon_pkl/app/modules/siswa/home_siswa/views/home_siswa_view.dart';
 import 'package:simon_pkl/app/modules/snapshot/views/snapshot_view.dart';
-import 'package:simon_pkl/material/material.dart';
 
 import 'app/routes/app_pages.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Get.put(LoginController());
-  // Get.put(ProfilePageController());
+  
 
   final auth = Get.find<LoginController>();
 
@@ -32,21 +30,43 @@ void main() async {
               future: auth.autoLogin(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  if (auth.isAuth.isTrue == true &&
-                      AllMaterial.box.read("token") != null) {
-                    if (auth.isDudi == true && auth.dataLoginDudi != null) {
+                  try {
+                    print("data auth: ${auth.dataAuth}");
+                    print("ini dudi: ${auth.dataLoginDudi}");
+                    print("ini guru: ${auth.dataLoginGuru}");
+                    print("ini siswa: ${auth.dataLoginSiswa}");
+                    // if (dataAuth != "" &&
+                    //     dataLoginDudi.toString().contains("username")) {
+                    //   return HomeDudi();
+                    // } else if (dataAuth != "" &&
+                    //     dataLoginSiswa.toString().contains("nis")) {
+                    //   return HomeSiswa();
+                    // } else if (dataAuth != "" &&
+                    //     dataLoginGuru.toString().contains("nip")) {
+                    //   return HomeGuruView();
+                    // } else {
+                    //   return LoginView();
+                    // }
+                    if (auth.dataAuth != "" && auth.dataLoginDudi != null) {
+                      print("route ke home dudi");
                       return HomeDudi();
-                    } else if (auth.isSiswa == true && auth.dataLoginSiswa != null) {
+                    } else if (auth.dataAuth != "" &&
+                        auth.dataLoginSiswa != null) {
+                      print("route ke home siswa");
                       return HomeSiswa();
-                    } else if (auth.isGuru == true && auth.dataLoginGuru != null) {
+                    } else if (auth.dataAuth != "" &&
+                        auth.dataLoginGuru != null) {
+                      print("route ke home guru");
                       return HomeGuruView();
-                      // return HomeSiswa();
                     } else {
-                      return Scaffold();
+                      return LoginView();
                     }
-                  } else {
-                    // return SelectLoginView();
-                    return LoginView();
+                  } catch (e) {
+                    return Scaffold(
+                      body: Center(
+                        child: Text("Error : $e"),
+                      ),
+                    );
                   }
                 } else {
                   return SnapshotView();

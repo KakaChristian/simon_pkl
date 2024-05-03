@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/bx.dart';
 import 'package:iconify_flutter/icons/bxs.dart';
-import 'package:simon_pkl/app/modules/guru_pembimbing/home_guru/views/home_guru_view.dart';
+import 'package:simon_pkl/app/modules/dudi/home_page_dudi/views/home_page_dudi_view.dart';
 import 'package:simon_pkl/material/material.dart';
 
 class HomeDudi extends StatefulWidget {
@@ -46,7 +46,7 @@ class _HomeDudiState extends State<HomeDudi> {
         children: [
           // Beranda =======>
           //  BerandaPageView(),
-          HomeGuruView()
+          HomePageDudiView()
           // Laporan =======>
           // const LaporanPageView(),
 

@@ -10,3 +10,4 @@ class HomeSiswaBinding extends Bindings {
     );
   }
 }
+

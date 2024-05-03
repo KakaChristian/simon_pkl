@@ -5,13 +5,14 @@ import 'package:iconify_flutter/icons/bx.dart';
 import 'package:iconify_flutter/icons/bxs.dart';
 
 import 'package:simon_pkl/app/modules/siswa/beranda_page/views/beranda_page_view.dart';
+import 'package:simon_pkl/app/modules/siswa/home_siswa/controllers/home_siswa_controller.dart';
 import 'package:simon_pkl/app/modules/siswa/laporan_page/views/laporan_page_view.dart';
 import 'package:simon_pkl/app/modules/siswa/notifikasi_page/views/notifikasi_page_view.dart';
 import 'package:simon_pkl/app/modules/siswa/profile_page/views/profile_page_view.dart';
 import 'package:simon_pkl/material/material.dart';
 
 class HomeSiswa extends StatefulWidget {
-  const HomeSiswa({Key? key}) : super(key: key);
+  HomeSiswa({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -19,16 +20,18 @@ class HomeSiswa extends StatefulWidget {
 }
 
 class _HomeSiswaState extends State<HomeSiswa> {
+  var dataSiswa = HomeSiswaController();
   int selectedIndex = 0;
 
   final PageController pageController = PageController(initialPage: 0);
 
-  void onItemTapped(int index) {
+  void onItemTapped(int index) async {
     pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
     );
+    await dataSiswa.fetchDataSiswa();
   }
 
   @override
@@ -49,7 +52,7 @@ class _HomeSiswaState extends State<HomeSiswa> {
         },
         children: [
           // Beranda =======>
-           BerandaPageView(),
+          BerandaPageView(),
 
           // Laporan =======>
           const LaporanPageView(),
@@ -81,12 +84,7 @@ class _HomeSiswaState extends State<HomeSiswa> {
         items: [
           BottomNavigationBarItem(
             icon: (selectedIndex == 0)
-                ? Icon(
-                    Icons.home,
-                    color: (selectedIndex == 0)
-                        ? AllMaterial.colorBlue
-                        : AllMaterial.colorGrey,
-                  )
+                ? Icon(Icons.home, color: AllMaterial.colorBlue)
                 : const Icon(
                     Icons.home_outlined,
                   ),
@@ -94,14 +92,8 @@ class _HomeSiswaState extends State<HomeSiswa> {
             label: "Beranda",
           ),
           BottomNavigationBarItem(
-            // icon: Icon(Icons.data_saver_off_sharp),
             icon: (selectedIndex == 1)
-                ? Iconify(
-                    Bxs.pie_chart_alt,
-                    color: (selectedIndex == 1)
-                        ? AllMaterial.colorBlue
-                        : AllMaterial.colorGrey,
-                  )
+                ? Iconify(Bxs.pie_chart_alt, color: AllMaterial.colorBlue)
                 : const Iconify(
                     Bx.pie_chart_alt,
                     color: AllMaterial.colorGrey,
@@ -110,30 +102,24 @@ class _HomeSiswaState extends State<HomeSiswa> {
             tooltip: "Laporan",
           ),
           BottomNavigationBarItem(
-            icon: (selectedIndex == 2)
-                ? Icon(
-                    Icons.notifications,
-                    color: (selectedIndex == 2)
-                        ? AllMaterial.colorBlue
-                        : AllMaterial.colorGrey,
-                  )
-                : const Icon(
-                    Icons.notifications_outlined,
-                  ),
+            activeIcon: Icon(
+              Icons.notifications,
+              color: AllMaterial.colorBlue,
+            ),
+            icon: const Icon(
+              Icons.notifications_outlined,
+            ),
             label: "Notifikasi",
             tooltip: "Notifikasi",
           ),
           BottomNavigationBarItem(
-            icon: (selectedIndex == 3)
-                ? Icon(
-                    Icons.person,
-                    color: (selectedIndex == 3)
-                        ? AllMaterial.colorBlue
-                        : AllMaterial.colorGrey,
-                  )
-                : const Icon(
-                    Icons.person_outlined,
-                  ),
+            activeIcon: Icon(
+              Icons.person,
+              color: AllMaterial.colorBlue,
+            ),
+            icon: const Icon(
+              Icons.person_outlined,
+            ),
             label: "Profil",
             tooltip: "Profil",
           ),

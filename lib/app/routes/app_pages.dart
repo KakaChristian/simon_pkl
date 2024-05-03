@@ -37,7 +37,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeSiswa(),
+      page: () =>  HomeSiswa(),
       binding: HomeSiswaBinding(),
     ),
     GetPage(

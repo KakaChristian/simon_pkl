@@ -120,7 +120,19 @@ class LokasiPklView extends GetView<LokasiPklController> {
                               EdgeInsets.zero,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.defaultDialog(
+                              titleStyle: TextStyle(
+                                fontWeight: AllMaterial.fontMedium
+                              ),
+                              title: "Konfirmasi",
+                              middleText: "Apakah Anda yakin ingin mengajukan PKL di ${dataDudi[index]["nama_instansi_perusahaan"]}?",
+                              onConfirm: () {},
+                              barrierDismissible: true,
+                              textCancel: "Batalkan",
+                              textConfirm: "Konfirmasi",
+                            );
+                          },
                           child: const Text(
                             "Ajukan",
                             style: TextStyle(

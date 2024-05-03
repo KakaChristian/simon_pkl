@@ -17,8 +17,8 @@ class HomeGuruView extends GetView<HomeGuruController> {
       body:  Center(
         child: TextButton(
           child: Text(
-            'HomepageGuruView is working',
-            style: TextStyle(fontSize: 20),
+            '<== Balik',
+            style: TextStyle(fontSize: 25),
           ),
           onPressed: () => AllMaterial.box.remove("token"),
         ),

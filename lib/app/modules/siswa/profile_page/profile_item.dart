@@ -16,7 +16,7 @@ class ProfileItem extends GetView<ProfilePageController> {
   });
   final box = GetStorage();
 
-  var dataSiswa = AllMaterial.box.read("siswaData");
+  var dataSiswa = AllMaterial.box.read("dataSiswa");
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class ProfileItem extends GetView<ProfilePageController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FittedBox(
-              fit: BoxFit.cover,
+              fit: BoxFit.scaleDown,
               child: Text(
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -59,7 +59,6 @@ class ProfileItem extends GetView<ProfilePageController> {
                 ),
               ),
             ),
-            // SizedBox(height: 10,),
             Text(
               'NISN : ${dataSiswa["nis"]}',
               style: TextStyle(
