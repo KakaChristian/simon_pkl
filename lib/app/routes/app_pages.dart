@@ -1,21 +1,27 @@
 import 'package:get/get.dart';
 
-import '../modules/beranda_page/bindings/beranda_page_binding.dart';
-import '../modules/beranda_page/views/beranda_page_view.dart';
-import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
-import '../modules/laporan_page/bindings/laporan_page_binding.dart';
-import '../modules/laporan_page/views/laporan_page_view.dart';
-import '../modules/login_siswa/bindings/login_siswa_binding.dart';
-import '../modules/login_siswa/views/login_siswa_view.dart';
-import '../modules/lokasi_pkl/bindings/lokasi_pkl_binding.dart';
-import '../modules/lokasi_pkl/views/lokasi_pkl_view.dart';
-import '../modules/notifikasi_page/bindings/notifikasi_page_binding.dart';
-import '../modules/notifikasi_page/views/notifikasi_page_view.dart';
-import '../modules/profile_page/bindings/profile_page_binding.dart';
-import '../modules/profile_page/views/profile_page_view.dart';
-import '../modules/select_login/bindings/select_login_binding.dart';
-import '../modules/select_login/views/select_login_view.dart';
+import '../modules/dudi/home_dudi/bindings/home_dudi_binding.dart';
+import '../modules/dudi/home_dudi/views/home_dudi_view.dart';
+import '../modules/dudi/home_page_dudi/bindings/home_page_dudi_binding.dart';
+import '../modules/dudi/home_page_dudi/views/home_page_dudi_view.dart';
+import '../modules/guru_pembimbing/home_guru/bindings/home_guru_binding.dart';
+import '../modules/guru_pembimbing/home_guru/views/home_guru_view.dart';
+import '../modules/guru_pembimbing/homepage_guru/bindings/homepage_guru_binding.dart';
+import '../modules/guru_pembimbing/homepage_guru/views/homepage_guru_view.dart';
+import '../modules/login/bindings/login_binding.dart';
+import '../modules/login/views/login_view.dart';
+import '../modules/siswa/beranda_page/bindings/beranda_page_binding.dart';
+import '../modules/siswa/beranda_page/views/beranda_page_view.dart';
+import '../modules/siswa/home_siswa/bindings/home_siswa_binding.dart';
+import '../modules/siswa/home_siswa/views/home_siswa_view.dart';
+import '../modules/siswa/laporan_page/bindings/laporan_page_binding.dart';
+import '../modules/siswa/laporan_page/views/laporan_page_view.dart';
+import '../modules/siswa/lokasi_pkl/bindings/lokasi_pkl_binding.dart';
+import '../modules/siswa/lokasi_pkl/views/lokasi_pkl_view.dart';
+import '../modules/siswa/notifikasi_page/bindings/notifikasi_page_binding.dart';
+import '../modules/siswa/notifikasi_page/views/notifikasi_page_view.dart';
+import '../modules/siswa/profile_page/bindings/profile_page_binding.dart';
+import '../modules/siswa/profile_page/views/profile_page_view.dart';
 import '../modules/snapshot/bindings/snapshot_binding.dart';
 import '../modules/snapshot/views/snapshot_view.dart';
 
@@ -31,8 +37,8 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomePageAwal(),
-      binding: HomeBinding(),
+      page: () => const HomeSiswa(),
+      binding: HomeSiswaBinding(),
     ),
     GetPage(
       name: _Paths.SNAPSHOT,
@@ -40,13 +46,8 @@ class AppPages {
       binding: SnapshotBinding(),
     ),
     GetPage(
-      name: _Paths.SELECT_LOGIN,
-      page: () => const SelectLoginView(),
-      binding: SelectLoginBinding(),
-    ),
-    GetPage(
       name: _Paths.LOGIN_SISWA,
-      page: () => LoginSiswaView(),
+      page: () => LoginView(),
       binding: LoginSiswaBinding(),
     ),
     GetPage(
@@ -56,7 +57,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BERANDA_PAGE,
-      page: () =>  BerandaPageView(),
+      page: () => BerandaPageView(),
       binding: BerandaPageBinding(),
     ),
     GetPage(
@@ -73,6 +74,26 @@ class AppPages {
       name: _Paths.LOKASI_PKL,
       page: () => LokasiPklView(),
       binding: LokasiPklBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOME_DUDI,
+      page: () => const HomeDudi(),
+      binding: HomeDudiBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOME_GURU,
+      page: () => const HomeGuruView(),
+      binding: HomeGuruBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOMEPAGE_GURU,
+      page: () => const HomepageGuruView(),
+      binding: HomepageGuruBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOME_PAGE_DUDI,
+      page: () => const HomePageDudiView(),
+      binding: HomePageDudiBinding(),
     ),
   ];
 }

@@ -14,6 +14,11 @@ abstract class Routes {
   static const BERANDA_PAGE = _Paths.BERANDA_PAGE;
   static const NOTIFIKASI_PAGE = _Paths.NOTIFIKASI_PAGE;
   static const LOKASI_PKL = _Paths.LOKASI_PKL;
+  static const DUDI = _Paths.DUDI;
+  static const HOME_DUDI = _Paths.DUDI + _Paths.HOME_DUDI;
+  static const HOME_GURU = _Paths.GURU_PEMBIMBING + _Paths.HOME_GURU;
+  static const HOMEPAGE_GURU = _Paths.GURU_PEMBIMBING + _Paths.HOMEPAGE_GURU;
+  static const HOME_PAGE_DUDI = _Paths.DUDI + _Paths.HOME_PAGE_DUDI;
 }
 
 abstract class _Paths {
@@ -27,4 +32,10 @@ abstract class _Paths {
   static const BERANDA_PAGE = '/beranda-page';
   static const NOTIFIKASI_PAGE = '/notifikasi-page';
   static const LOKASI_PKL = '/lokasi-pkl';
+  static const HOME_DUDI = '/home-dudi';
+  static const DUDI = '/dudi';
+  static const HOME_GURU = '/home-guru';
+  static const GURU_PEMBIMBING = '/guru-pembimbing';
+  static const HOMEPAGE_GURU = '/homepage-guru';
+  static const HOME_PAGE_DUDI = '/home-page-dudi';
 }
