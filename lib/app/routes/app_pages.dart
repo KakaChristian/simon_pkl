@@ -10,6 +10,8 @@ import '../modules/guru_pembimbing/homepage_guru/bindings/homepage_guru_binding.
 import '../modules/guru_pembimbing/homepage_guru/views/homepage_guru_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/siswa/ajuan_pkl/bindings/ajuan_pkl_binding.dart';
+import '../modules/siswa/ajuan_pkl/views/ajuan_pkl_view.dart';
 import '../modules/siswa/beranda_page/bindings/beranda_page_binding.dart';
 import '../modules/siswa/beranda_page/views/beranda_page_view.dart';
 import '../modules/siswa/home_siswa/bindings/home_siswa_binding.dart';
@@ -37,7 +39,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () =>  HomeSiswa(),
+      page: () => HomeSiswa(),
       binding: HomeSiswaBinding(),
     ),
     GetPage(
@@ -94,6 +96,11 @@ class AppPages {
       name: _Paths.HOME_PAGE_DUDI,
       page: () => const HomePageDudiView(),
       binding: HomePageDudiBinding(),
+    ),
+    GetPage(
+      name: _Paths.AJUAN_PKL,
+      page: () =>  AjuanPklView(),
+      binding: AjuanPklBinding(),
     ),
   ];
 }

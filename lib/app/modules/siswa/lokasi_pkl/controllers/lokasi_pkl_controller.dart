@@ -7,15 +7,15 @@ import 'package:simon_pkl/material/material.dart';
 
 class LokasiPklController extends GetxController {
   String tampungToken = AllMaterial.box.read("token");
-  static const getDudiUrl = "http://10.0.2.2:2008/siswa/getDudi";
-
+  // static const getDudiUrl = "http://10.0.2.2:2008/siswa/getDudi";
+  static const getDudiUrl = "http://10.0.2.2:2008/siswa/getDudiFilter?page=1";
   var expandedIndices = List<bool?>.filled(19, false).obs;
 
   void setExpansion(int index, bool value) {
     expandedIndices[index] = value;
   }
 
-  var activeIndex = RxInt(-1);
+  // var activeIndex = RxInt(-1);
 
   @override
   void onClose() {
@@ -23,15 +23,11 @@ class LokasiPklController extends GetxController {
     super.onClose();
   }
 
-  void setActiveIndex(int index) {
-    if (activeIndex.value != index) {
-      activeIndex.value = index;
-    } else {
-      activeIndex.value = -1;
-    }
-  }
+  // void setActiveIndex() {
+  //   fetchDataById();
+  // }
 
-  bool isExpanded(int index) => activeIndex.value == index;
+  // bool isExpanded(int index) => activeIndex.value == index;
 
   RxBool isObsecure = true.obs;
 
@@ -42,15 +38,34 @@ class LokasiPklController extends GetxController {
         "Authorization": "Bearer $tampungToken",
       },
     );
-    var data = jsonDecode(response.body) as Map<String, dynamic>;
+    var data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       Get.toNamed(Routes.LOKASI_PKL);
-      AllMaterial.box.write("dataAllDudi", data["data"]);
+      AllMaterial.box.write("dataPrevDudi", data["data"]["dudi"]);
+      print(data["data"]);
     } else {
       print(data);
       print(tampungToken);
       print(response.statusCode);
       throw Exception('Error min');
+    }
+  }
+
+  Future<dynamic> fetchDataById() async {
+    var dataIdDudi = await AllMaterial.box.read("idPrevDudi");
+    final responseId = await http.get(
+      Uri.parse("http://10.0.2.2:2008/siswa/getDudi/$dataIdDudi"),
+      headers: {
+        "Authorization": "Bearer $tampungToken",
+      },
+    );
+    var dataId = jsonDecode(responseId.body);
+    print(dataId);
+    if (responseId.statusCode == 200) {
+      print(dataId["data"]);
+      AllMaterial.box.write("dataAllDudi", dataId["data"]);
+    } else {
+      print("kesalahan di fetch by id");
     }
   }
 }

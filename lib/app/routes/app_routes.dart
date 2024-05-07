@@ -19,6 +19,7 @@ abstract class Routes {
   static const HOME_GURU = _Paths.GURU_PEMBIMBING + _Paths.HOME_GURU;
   static const HOMEPAGE_GURU = _Paths.GURU_PEMBIMBING + _Paths.HOMEPAGE_GURU;
   static const HOME_PAGE_DUDI = _Paths.DUDI + _Paths.HOME_PAGE_DUDI;
+  static const AJUAN_PKL = _Paths.AJUAN_PKL;
 }
 
 abstract class _Paths {
@@ -38,4 +39,5 @@ abstract class _Paths {
   static const GURU_PEMBIMBING = '/guru-pembimbing';
   static const HOMEPAGE_GURU = '/homepage-guru';
   static const HOME_PAGE_DUDI = '/home-page-dudi';
+  static const AJUAN_PKL = '/siswa/ajuan-pkl';
 }

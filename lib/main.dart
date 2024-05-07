@@ -14,7 +14,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Get.put(LoginController());
-  
 
   final auth = Get.find<LoginController>();
 
@@ -35,26 +34,15 @@ void main() async {
                     print("ini dudi: ${auth.dataLoginDudi}");
                     print("ini guru: ${auth.dataLoginGuru}");
                     print("ini siswa: ${auth.dataLoginSiswa}");
-                    // if (dataAuth != "" &&
-                    //     dataLoginDudi.toString().contains("username")) {
-                    //   return HomeDudi();
-                    // } else if (dataAuth != "" &&
-                    //     dataLoginSiswa.toString().contains("nis")) {
-                    //   return HomeSiswa();
-                    // } else if (dataAuth != "" &&
-                    //     dataLoginGuru.toString().contains("nip")) {
-                    //   return HomeGuruView();
-                    // } else {
-                    //   return LoginView();
-                    // }
-                    if (auth.dataAuth != "" && auth.dataLoginDudi != null) {
+
+                    if (auth.dataAuth != null && auth.dataLoginDudi != null) {
                       print("route ke home dudi");
                       return HomeDudi();
-                    } else if (auth.dataAuth != "" &&
+                    } else if (auth.dataAuth != null &&
                         auth.dataLoginSiswa != null) {
                       print("route ke home siswa");
                       return HomeSiswa();
-                    } else if (auth.dataAuth != "" &&
+                    } else if (auth.dataAuth != null &&
                         auth.dataLoginGuru != null) {
                       print("route ke home guru");
                       return HomeGuruView();
@@ -68,6 +56,12 @@ void main() async {
                       ),
                     );
                   }
+                } else if (snapshot.hasError) {
+                  return Scaffold(
+                    body: Center(
+                      child: Text("error di main"),
+                    ),
+                  );
                 } else {
                   return SnapshotView();
                 }

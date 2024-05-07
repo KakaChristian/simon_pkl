@@ -31,7 +31,9 @@ class _HomeSiswaState extends State<HomeSiswa> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
     );
-    await dataSiswa.fetchDataSiswa();
+    if (index == 3) {
+      await dataSiswa.fetchDataSiswa();
+    }
   }
 
   @override
